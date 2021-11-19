@@ -27,22 +27,39 @@
             ?workout6 - workout
             ?workout7 - workout
         )
-        :precondition (not (or  
-            (non_sequential ?workout1 ?workout2)
-            (non_sequential ?workout2 ?workout3)
-            (non_sequential ?workout3 ?workout4)
-            (non_sequential ?workout4 ?workout5)
-            (non_sequential ?workout5 ?workout6)
-            (non_sequential ?workout6 ?workout7)
-        ))
-        :effect (and 
-            (increase (exertion_total) (exertion ?workout1))
-            (increase (exertion_total) (exertion ?workout2))
-            (increase (exertion_total) (exertion ?workout3))
-            (increase (exertion_total) (exertion ?workout4))
-            (increase (exertion_total) (exertion ?workout5))
-            (increase (exertion_total) (exertion ?workout6))
-            (increase (exertion_total) (exertion ?workout7))
+        :precondition (and 
+            (not (or  
+                (non_sequential ?workout1 ?workout2)
+                (non_sequential ?workout2 ?workout3)
+                (non_sequential ?workout3 ?workout4)
+                (non_sequential ?workout4 ?workout5)
+                (non_sequential ?workout5 ?workout6)
+                (non_sequential ?workout6 ?workout7)
+
+            ))
+            (< 
+                (+(exertion ?workout1)
+                (+(exertion ?workout2)
+                (+(exertion ?workout3)
+                (+(exertion ?workout4)
+                (+(exertion ?workout5)
+                (+(exertion ?workout6)
+                (exertion ?workout7))))))
+            ) 200)
+            (> 
+                (+(exertion ?workout1)
+                (+(exertion ?workout2)
+                (+(exertion ?workout3)
+                (+(exertion ?workout4)
+                (+(exertion ?workout5)
+                (+(exertion ?workout6)
+                (exertion ?workout7))))))
+            ) 150)
+        )
+        :effect (and
+            (forall (?w - workout)
+                (increase (exertion_total) (exertion ?w))
+            )
         )
     )
 )
