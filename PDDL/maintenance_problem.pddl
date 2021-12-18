@@ -16,10 +16,10 @@
         (= (increment_speed) 0)
         (incremented)
 
-        (= (exertion easy_run) 60)
+        (= (exertion easy_run) 30)
         (= (exertion swim) 45)
-        (= (exertion spin) 60)
-        (= (exertion strength_workout) 20)
+        (= (exertion spin) 30)
+        (= (exertion strength_workout) 10)
         (= (exertion rest) 0)
 
         (= (distance easy_run) 3)
@@ -31,7 +31,6 @@
         (non_sequential easy_run easy_run)
         (non_sequential swim swim)
         (non_sequential strength_workout strength_workout)
-        (non_sequential spin spin)
         (non_sequential easy_run strength_workout)
         
         (is_strength strength_workout)

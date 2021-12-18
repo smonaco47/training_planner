@@ -11,7 +11,7 @@
     )
 
     (:init
-        (= (max_time) 240)
+        (= (max_time) 300)
         (= (week_max_distance) 5)
         (= (increment_speed) 1)
         (incremented)
@@ -26,10 +26,10 @@
         (= (distance rest) 0)
 
         (= (exertion easy_run) 30)
-        (= (exertion long_run) 30)
+        (= (exertion long_run) 60)
         (= (exertion cross_train) 45)
         (= (exertion intervals) 45)
-        (= (exertion strength_workout) 20)
+        (= (exertion strength_workout) 10)
         (= (exertion rest) 0)
 
         (non_sequential long_run strength_workout)
@@ -37,15 +37,16 @@
         (non_sequential strength_workout strength_workout)
         (non_sequential intervals strength_workout)
         (non_sequential strength_workout intervals)
-        (non_sequential easy_run easy_run)
+        (non_sequential cross_train cross_train)
         (non_sequential long_run long_run)
         (non_sequential intervals intervals)
+        
 
         (is_strength strength_workout)
     )
 
     (:goal (and
-        (>= (distance long_run) 6)
+        (>= (distance long_run) 20)
         (not (incremented))
     ))
 )

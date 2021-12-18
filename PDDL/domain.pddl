@@ -16,7 +16,6 @@
     (:functions
         (exertion ?workout - workout)
         (exertion_total)
-        (increase_length ?workout - workout)
         (distance ?workout - workout)
         (max_time)
         (week_max_distance)
