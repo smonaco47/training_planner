@@ -1,7 +1,5 @@
-; https://fareskalaboud.github.io/LearnPDDL/
-
 (define 
-    (problem train_plan-simple) 
+    (problem train_plan-marathon) 
     (:domain train_plan)
     (:objects 
         easy_run - workout
@@ -14,11 +12,11 @@
 
     (:init
         (= (max_time) 240)
-        (= (exertion_total) 0)
         (= (week_max_distance) 5)
         (= (increment_speed) 1)
-        (= (weekly_distance) 0)
         (incremented)
+        
+        (= (exertion_total) 0)
 
         (= (distance long_run) 3)
         (= (distance easy_run) 3)
@@ -34,16 +32,21 @@
         (= (exertion strength_workout) 20)
         (= (exertion rest) 0)
 
-        (non_sequential long_run long_run)
         (non_sequential long_run strength_workout)
         (non_sequential strength_workout long_run)
         (non_sequential strength_workout strength_workout)
+        (non_sequential intervals strength_workout)
+        (non_sequential strength_workout intervals)
+        (non_sequential easy_run easy_run)
+        (non_sequential long_run long_run)
+        (non_sequential intervals intervals)
 
         (is_strength strength_workout)
     )
 
     (:goal (and
-        (>= (distance long_run) 12)
+        (>= (distance long_run) 6)
+        (not (incremented))
     ))
 )
 

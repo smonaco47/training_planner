@@ -1,20 +1,6 @@
-# training_planner
+# Training Plans
 
+This repository contains toy programs to try to create running training plans and learn some new technology.
 
-Download latest package https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html
-
-Build:
-```
-docker run -it -v /src:..path_to_folder ubuntu bash
-
-cd /src
-
-sudo apt-get update 
-sudo apt-get upgrade 
-sudo apt-get install flex bison make
-
-make
-
-./ff -p ../../lets_eat/ -o domain.pddl -f problem.pddl -s 0
-```
-Other option: https://github.com/KCL-Planning/DiNo
+Implementations
+1. [PDDL](PDDL/README.md): Uses a planning algorithm to optimize a weekly training plan

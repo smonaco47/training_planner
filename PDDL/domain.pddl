@@ -1,8 +1,6 @@
-; https://fareskalaboud.github.io/LearnPDDL/
-
 (define 
     (domain train_plan)
-    (:requirements :typing :fluents :negative-preconditions)
+    (:requirements :typing :fluents :negative-preconditions :disjunctive-preconditions)
     (:types
         workout - object
         rest - workout
@@ -23,7 +21,6 @@
         (max_time)
         (week_max_distance)
         (increment_speed)
-        (weekly_distance)
     )
 
     (:action schedule_week
@@ -47,6 +44,7 @@
                 (is_strength ?workout6)
                 (is_strength ?workout7)
             )
+            ; Make sure we are allowing time to rest after hard workouts
             (not (or  
                 (non_sequential ?workout1 ?workout2)
                 (non_sequential ?workout2 ?workout3)
@@ -97,14 +95,6 @@
             (increase (exertion_total) (exertion ?workout5))
             (increase (exertion_total) (exertion ?workout6))
             (increase (exertion_total) (exertion ?workout7))
-
-            (increase (weekly_distance) (distance ?workout1))
-            (increase (weekly_distance) (distance ?workout2))
-            (increase (weekly_distance) (distance ?workout3))
-            (increase (weekly_distance) (distance ?workout4))
-            (increase (weekly_distance) (distance ?workout5))
-            (increase (weekly_distance) (distance ?workout6))
-            (increase (weekly_distance) (distance ?workout7))
         )
     )
 
@@ -117,11 +107,9 @@
         )
         :effect (and 
             ; No more than 1% increase per week
-            (increase (week_max_distance) (* (week_max_distance) 1.1))
+            (increase (week_max_distance) (* (week_max_distance) 0.25))
             (increase (distance ?workout) (increment_speed))
-            (assign (weekly_distance) 0)
             (incremented)
         )
     )
-    
 )

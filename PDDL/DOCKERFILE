@@ -1,0 +1,13 @@
+FROM ubuntu
+
+RUN apt-get update && apt-get -y upgrade && apt-get -y install flex bison make curl
+
+WORKDIR /src
+RUN curl https://fai.cs.uni-saarland.de/hoffmann/ff/Metric-FF-v2.1.tgz -o Metric-FF-v2.1.tgz
+RUN tar -xvzf Metric-FF-v2.1.tgz
+RUN mv Metric-FF-v2.1 /Metric-FF-v2.1
+WORKDIR /Metric-FF-v2.1
+RUN make
+
+WORKDIR /src
+COPY . .
